@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonPatch.Net" Version="2.1.0" />
+    <PackageReference Include="KubernetesClient" Version="12.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DockerApi\DockerApi.csproj" />
+    <ProjectReference Include="..\KubeDashboard.Interfaces\KubeDashboard.Interfaces.csproj" />
+    <ProjectReference Include="..\KubeDashboard.Model\KubeDashboard.Model.csproj" />
+  </ItemGroup>
+
+</Project>

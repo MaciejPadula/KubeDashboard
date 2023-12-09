@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KubeDashboard.Api\KubeDashboard.Api.csproj" />
+    <ProjectReference Include="..\KubeDashboard.Interfaces\KubeDashboard.Interfaces.csproj" />
+    <ProjectReference Include="..\KubeDashboard.Model\KubeDashboard.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Api\Request\" />
+  </ItemGroup>
+
+</Project>
