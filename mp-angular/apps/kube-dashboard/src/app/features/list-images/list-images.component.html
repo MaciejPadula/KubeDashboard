@@ -1,0 +1,29 @@
+
+
+<mat-accordion multi>
+
+  @for (image of images(); track $index) {
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{image.name}}
+        </mat-panel-title>
+        <mat-panel-description class="flex justify-end">
+          <div>
+            {{'ListImages.SuggestedTag' | translate}}:
+          </div>
+          <div class="font-bold">
+            {{image.tags[0]}}
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      {{'ListImages.AvailableTags' | translate}}
+      @for (tag of image.tags; track $index) {
+        <p>{{tag}}</p>
+      }
+
+    </mat-expansion-panel>
+  }
+
+</mat-accordion>

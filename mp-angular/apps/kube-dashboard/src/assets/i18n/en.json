@@ -1,0 +1,9 @@
+{
+  "Navbar": {
+    "Title": "KubeDashboard"
+  },
+  "ListImages": {
+    "AvailableTags": "All available tags",
+    "SuggestedTag": "Suggested tag"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "name": "kube-dashboard",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "mp-angular",
+  "sourceRoot": "apps/kube-dashboard/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/kube-dashboard",
+        "index": "apps/kube-dashboard/src/index.html",
+        "browser": "apps/kube-dashboard/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/kube-dashboard/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/kube-dashboard/src/favicon.ico",
+          "apps/kube-dashboard/src/assets"
+        ],
+        "styles": ["apps/kube-dashboard/src/styles.scss"],
+        "scripts": [],
+        "server": "apps/kube-dashboard/src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "apps/kube-dashboard/server.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "kube-dashboard:build:production"
+        },
+        "development": {
+          "buildTarget": "kube-dashboard:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "kube-dashboard:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/kube-dashboard/**/*.ts",
+          "apps/kube-dashboard/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/kube-dashboard/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "kube-dashboard:build",
+        "staticFilePath": "dist/apps/kube-dashboard/browser"
+      }
+    }
+  }
+}
