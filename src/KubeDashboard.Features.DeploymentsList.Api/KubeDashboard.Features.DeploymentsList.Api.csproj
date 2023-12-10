@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.2.0" />
+    <ProjectReference Include="..\KubeDashboard.Api\KubeDashboard.Api.csproj" />
+    <ProjectReference Include="..\KubeDashboard.Features.DeploymentsList\KubeDashboard.Features.DeploymentsList.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KubeDashboard.Interfaces\KubeDashboard.Interfaces.csproj" />
-    <ProjectReference Include="..\KubeDashboard.Model\KubeDashboard.Model.csproj" />
+    <Folder Include="Request\" />
   </ItemGroup>
 
 </Project>

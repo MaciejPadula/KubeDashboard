@@ -25,7 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubeDashboard.Features.Crea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubeDashboard.Api", "KubeDashboard.Api\KubeDashboard.Api.csproj", "{4362E00F-4576-43EA-812B-2A99679C7350}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KubeDashboard.Features.DeploymentsList", "KubeDashboard.Features.DeploymentsList\KubeDashboard.Features.DeploymentsList.csproj", "{CAA64A49-7C33-44B0-8684-5ACBAC418A41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubeDashboard.Features.DeploymentsList", "KubeDashboard.Features.DeploymentsList\KubeDashboard.Features.DeploymentsList.csproj", "{CAA64A49-7C33-44B0-8684-5ACBAC418A41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{54E14160-190D-4DD4-B1B2-CDECC92CFAB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KubeDashboard.Features.DeploymentsList.Api", "KubeDashboard.Features.DeploymentsList.Api\KubeDashboard.Features.DeploymentsList.Api.csproj", "{8D327707-CE41-4ABD-AA8A-A7C87FB2B618}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +77,10 @@ Global
 		{CAA64A49-7C33-44B0-8684-5ACBAC418A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAA64A49-7C33-44B0-8684-5ACBAC418A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAA64A49-7C33-44B0-8684-5ACBAC418A41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D327707-CE41-4ABD-AA8A-A7C87FB2B618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D327707-CE41-4ABD-AA8A-A7C87FB2B618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D327707-CE41-4ABD-AA8A-A7C87FB2B618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D327707-CE41-4ABD-AA8A-A7C87FB2B618}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +91,8 @@ Global
 		{0420A63D-8256-498D-9B58-04FD28AD2B94} = {4CEE7F64-CA7E-47C8-995D-83F45D9ED835}
 		{605A3ABC-6720-4A30-A0E7-417DF1F6662E} = {4CEE7F64-CA7E-47C8-995D-83F45D9ED835}
 		{CAA64A49-7C33-44B0-8684-5ACBAC418A41} = {4CEE7F64-CA7E-47C8-995D-83F45D9ED835}
+		{54E14160-190D-4DD4-B1B2-CDECC92CFAB6} = {4CEE7F64-CA7E-47C8-995D-83F45D9ED835}
+		{8D327707-CE41-4ABD-AA8A-A7C87FB2B618} = {54E14160-190D-4DD4-B1B2-CDECC92CFAB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98C47826-F46F-4C44-94AA-4BC4EF8D864E}

@@ -1,0 +1,18 @@
+<mat-accordion>
+  @for (deployment of deployments(); track $index) {
+    <mat-expansion-panel #deploy>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ deployment.name }}</mat-panel-title>
+
+        <mat-panel-description class="flex justify-end">
+          {{ deployment.replicas }}
+        </mat-panel-description>
+
+      </mat-expansion-panel-header>
+
+      @defer (on interaction(deploy)) {
+        <mp-angular-deployment-center [deployment]="deployment" />
+      }
+    </mat-expansion-panel>
+  }
+</mat-accordion>

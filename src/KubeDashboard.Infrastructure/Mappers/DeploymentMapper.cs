@@ -28,9 +28,9 @@ internal static class DeploymentMapper
                 Selector = new V1LabelSelector()
                 {
                     MatchLabels = new Dictionary<string, string>
-                        {
-                            { "app", deployment.Name }
-                        }
+                    {
+                        { "app", deployment.Name }
+                    }
                 },
                 Replicas = deployment.Replicas,
                 Template = new()
@@ -44,9 +44,9 @@ internal static class DeploymentMapper
                     Metadata = new()
                     {
                         Labels = new Dictionary<string, string>
-                            {
-                                { "app", deployment.Name }
-                            }
+                        {
+                            { "app", deployment.Name }
+                        }
                     }
                 }
             }

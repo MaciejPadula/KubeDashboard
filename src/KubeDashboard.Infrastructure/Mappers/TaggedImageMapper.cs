@@ -17,7 +17,7 @@ internal static class TaggedImageMapper
     internal static V1Container ToIto(this TaggedImage image) =>
         new()
         {
-            Name = image.Name,
+            Name = "teststsas",
             Image = $"{image.Name}:{image.Tag}",
             ImagePullPolicy = "Always"
         };

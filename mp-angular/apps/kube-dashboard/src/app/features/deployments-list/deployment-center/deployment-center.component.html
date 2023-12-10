@@ -1,0 +1,18 @@
+<div>
+  {{ 'DeploymentsList.AlivePods' | translate }}
+
+  @for (pod of alivePods(); track $index) {
+    <div>
+      {{ pod.name }} : {{ pod.status }}
+    </div>
+  }
+</div>
+<div>
+  {{ 'DeploymentsList.DeadPods' | translate }}
+
+  @for (pod of deadPods(); track $index) {
+    <div>
+      {{ pod.name }} : {{ pod.status }}
+    </div>
+  }
+</div>

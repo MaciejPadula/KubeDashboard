@@ -29,6 +29,16 @@ internal class KubernetesDeploymentManager : IDeploymentManager
         return deploy.Items.Select(d => d.ToDto());
     }
 
+    public async Task<IEnumerable<Pod>> GetPods(string deploymentName, string kNamespace)
+    {
+        var pods = await _kubernetes.CoreV1.ListNamespacedPodAsync(kNamespace);
+
+        return pods.Items
+            .Where(p => p.Name().StartsWith(deploymentName))
+            .Select(p => new Pod(p.Name(), p.Status.Phase, !p.Status.ContainerStatuses.Any(c => !c.Ready)))
+            .ToList();
+    }
+
     public async Task Restart(string kNamespace, string name)
     {
         var deploy = await _kubernetes.AppsV1.ReadNamespacedDeploymentAsync(name, kNamespace);
