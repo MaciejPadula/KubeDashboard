@@ -9,5 +9,6 @@ public interface IDeploymentManager
     Task<IEnumerable<Pod>> GetPods(string deploymentName, string kNamespace);
     Task<Dictionary<string, string>> GetDeploymentEnvironmentVariables(string deploymentName, string kNamespace);
     Task AddDeploymentEnvironmentVariables(string deploymentName, string kNamespace, Dictionary<string, string> variables);
+    Task AddServiceForDeployment(string deploymentName, string serviceName, string kNamespace);
     Task Restart(string kNamespace, string name);
 }

@@ -4,7 +4,7 @@ using MediatR;
 
 namespace KubeDashboard.Features.CreateDeployment.CreateDeployment;
 
-internal record class CreateDeploymentCommand(string Name, DeploymentType Type, int Replicas, IEnumerable<TaggedImage> Images, string Namespace) : IRequest;
+public record class CreateDeploymentCommand(string Name, DeploymentType Type, int Replicas, IEnumerable<TaggedImage> Images, string Namespace) : IRequest;
 
 internal class CreateDeploymentCommandHandler : IRequestHandler<CreateDeploymentCommand>
 {

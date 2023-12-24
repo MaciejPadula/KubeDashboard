@@ -15,6 +15,7 @@ public static class IServiceCollectionExtensions
             KubernetesClientConfiguration.BuildDefaultConfig()));
         
         services.AddScoped<IDeploymentManager, KubernetesDeploymentManager>();
+        services.AddScoped<IServiceManager, KubernetesServiceManager>();
 
         return services;
     }

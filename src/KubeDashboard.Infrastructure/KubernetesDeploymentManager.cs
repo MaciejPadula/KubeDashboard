@@ -53,6 +53,21 @@ internal class KubernetesDeploymentManager : IDeploymentManager
         await _kubernetes.AppsV1.ReplaceNamespacedDeploymentAsync(deploy, deploymentName, kNamespace);
     }
 
+    public async Task AddServiceForDeployment(string deploymentName, string serviceName, string kNamespace)
+    {
+        var deploys = await _kubernetes.AppsV1.ListNamespacedDeploymentAsync(kNamespace);
+        var deploy = deploys.Items.FirstOrDefault(d => d.Name() == deploymentName);
+
+        if (deploy is null)
+        {
+            return;
+        }
+
+        deploy.Spec.Selector.MatchLabels.Add("app", serviceName);
+        //deploy.Spec.Template.Metadata.Labels["app"] = serviceName;
+        await _kubernetes.AppsV1.ReplaceNamespacedDeploymentAsync(deploy, deploymentName, kNamespace);
+    }
+
     public async Task CreateDeployment(Deployment deployment)
     {
         await _kubernetes.AppsV1.CreateNamespacedDeploymentAsync(
