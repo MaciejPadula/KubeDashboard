@@ -3,9 +3,9 @@ using MediatR;
 
 namespace KubeDashboard.Features.DeploymentControl.RestartDeployment;
 
-internal record class RestartDeploymentRequest(string Namespace, string DeploymentName) : IRequest;
+public record class RestartDeploymentCommand(string Namespace, string DeploymentName) : IRequest;
 
-internal class RestartDeploymentHandler : IRequestHandler<RestartDeploymentRequest>
+internal class RestartDeploymentHandler : IRequestHandler<RestartDeploymentCommand>
 {
     private readonly IDeploymentManager _deploymentManager;
 
@@ -14,7 +14,7 @@ internal class RestartDeploymentHandler : IRequestHandler<RestartDeploymentReque
         _deploymentManager = deploymentManager;
     }
 
-    public async Task Handle(RestartDeploymentRequest request, CancellationToken cancellationToken)
+    public async Task Handle(RestartDeploymentCommand request, CancellationToken cancellationToken)
     {
         await _deploymentManager.Restart(request.Namespace, request.DeploymentName);
     }

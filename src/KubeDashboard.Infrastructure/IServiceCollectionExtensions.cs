@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace KubeDashboard.Infrastructure;
 public static class IServiceCollectionExtensions
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructureModule(this IServiceCollection services)
     {
         services.AddDockerClient();
         services.AddScoped<IImageRepository, DockerImageRepository>();

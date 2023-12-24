@@ -11,13 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KubeDashboard.Api\KubeDashboard.Api.csproj" />
     <ProjectReference Include="..\KubeDashboard.Interfaces\KubeDashboard.Interfaces.csproj" />
     <ProjectReference Include="..\KubeDashboard.Model\KubeDashboard.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Api\Request\" />
   </ItemGroup>
 
 </Project>

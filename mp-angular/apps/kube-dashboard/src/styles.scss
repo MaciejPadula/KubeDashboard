@@ -30,19 +30,43 @@ $kube-dashboard-theme: mat.define-light-theme(
       accent: $kube-dashboard-accent,
       warn: $kube-dashboard-warn,
     ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+$kube-dashboard-theme-dark: mat.define-dark-theme(
+  (
+    color: (
+      primary: $kube-dashboard-primary,
+      accent: $kube-dashboard-accent,
+      warn: $kube-dashboard-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
   )
 );
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($kube-dashboard-theme);
+
+@include mat.all-component-themes($kube-dashboard-theme-dark);
+
+@media (prefers-color-scheme: light) {
+	@include mat.all-component-themes($kube-dashboard-theme);
+
+  body {
+    background-color: white;
+  }
+}
 
 /* You can add global styles to this file, and also import other style files */
 
 html,
 body {
   height: 100%;
+  background-color: #323232;
 }
 body {
   margin: 0;

@@ -1,0 +1,28 @@
+<div>
+  @for (image of deployment.images; track $index) {
+    <div>
+      {{ image.name }} : {{ image.tag }}
+    </div>
+  }
+</div>
+
+<canvas [id]="'pods-chart-' + deployment.name">{{ chart }}</canvas>
+
+<div>
+  {{ 'DeploymentsList.AlivePods' | translate }}
+
+  @for (pod of alivePods(); track $index) {
+    <div>
+      {{ pod.name }} : {{ pod.status }}
+    </div>
+  }
+</div>
+<div>
+  {{ 'DeploymentsList.DeadPods' | translate }}
+
+  @for (pod of deadPods(); track $index) {
+    <div>
+      {{ pod.name }} : {{ pod.status }}
+    </div>
+  }
+</div>

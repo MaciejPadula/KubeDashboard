@@ -5,5 +5,9 @@
   "ListImages": {
     "AvailableTags": "All available tags",
     "SuggestedTag": "Suggested tag"
+  },
+  "DeploymentsList": {
+    "AlivePods": "Active Pods",
+    "DeadPods": "Dead Pods"
   }
 }

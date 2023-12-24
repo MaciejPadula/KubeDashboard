@@ -4,7 +4,7 @@ using MediatR;
 
 namespace KubeDashboard.Features.DeploymentsList.GetDeployments;
 
-internal record class GetDeploymentsQuery(string Namespace) : IRequest<List<Deployment>>;
+public record class GetDeploymentsQuery(string Namespace) : IRequest<List<Deployment>>;
 
 internal class GetDeploymentsQueryHandler : IRequestHandler<GetDeploymentsQuery, List<Deployment>>
 {
