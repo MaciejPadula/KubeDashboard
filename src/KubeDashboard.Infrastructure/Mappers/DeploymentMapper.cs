@@ -9,6 +9,7 @@ internal static class DeploymentMapper
         new(deployment.Name(),
             DeploymentType.CronJob,
             deployment.Spec.Replicas ?? 0,
+            deployment.Status.ReadyReplicas ?? 0,
             deployment.Spec.Template.Spec.Containers.Select(c => c.ToDto()),
             deployment.Namespace());
 

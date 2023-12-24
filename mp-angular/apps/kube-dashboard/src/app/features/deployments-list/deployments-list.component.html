@@ -4,8 +4,11 @@
       <mat-expansion-panel-header>
         <mat-panel-title>{{ deployment.name }}</mat-panel-title>
 
-        <mat-panel-description class="flex justify-end">
-          {{ deployment.replicas }}
+        <mat-panel-description class="flex justify-end !flex-grow">
+          <div class="flex flex-row items-center justify-center">
+            <mp-angular-status-icon [status]="getStatusOfDeployment(deployment)" />
+            <div>{{deployment.aliveReplicas}} / {{ deployment.replicas }}</div>
+          </div>
         </mat-panel-description>
 
       </mat-expansion-panel-header>

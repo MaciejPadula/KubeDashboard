@@ -1,4 +1,5 @@
 ﻿using KubeDashboard.Api;
+using KubeDashboard.Features.DeploymentControl.AddEnvironmentVariables;
 using KubeDashboard.Features.DeploymentControl.Api.Request;
 using KubeDashboard.Features.DeploymentControl.RestartDeployment;
 using MediatR;
@@ -16,9 +17,16 @@ public class DeploymentController : ApiControllerBase
     }
 
     [HttpPost]
+    public async Task AddEnvironmentVariables([FromBody] AddEnvironmentVariablesCommand request)
+    {
+        await _mediator.Send(new AddEnvironmentVariablesCommand(
+            request.Namespace, request.DeploymentName, request.EnvironmentVariables));
+    }
+
+    [HttpPost]
     public async Task Restart([FromBody] RestartRequest request)
     {
-        await _mediator.Send(new RestartDeploymentRequest(
+        await _mediator.Send(new RestartDeploymentCommand(
             request.Namespace, request.DeploymentName));
     }
 }

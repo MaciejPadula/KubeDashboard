@@ -14,7 +14,7 @@ import { Deployment } from '../../shared/model/deployment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddDeploymentComponent {
-  public deployForm = new FormControl<Deployment>({name: "", replicas: 0, namespace: ''});
+  public deployForm = new FormControl<Deployment>({name: "", replicas: 0, aliveReplicas: 0, namespace: '', images: []});
 
   constructor(
     private service: AddDeploymentService
