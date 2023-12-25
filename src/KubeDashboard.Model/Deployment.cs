@@ -2,8 +2,7 @@
 
 public record struct Deployment(
     string Name,
-    DeploymentType Type,
     int Replicas,
     int AliveReplicas,
-    IEnumerable<TaggedImage> Images,
+    IEnumerable<Container> Containers,
     string Namespace);

@@ -14,7 +14,12 @@ internal class KubernetesServiceManager : IServiceManager
         _kubernetes = kubernetes;
     }
 
-    public async Task AddService(string serviceName, string kNamespace, LoadBalancerConfiguration configuration)
+    public Task AddCronJob(string serviceName, string deploymentName, string kNamespace)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task AddLoadBalancer(string serviceName, string deploymentName, string kNamespace, LoadBalancerConfiguration configuration)
     {
         var service = new V1Service
         {
@@ -39,11 +44,11 @@ internal class KubernetesServiceManager : IServiceManager
                 ExternalIPs = configuration.ExternalIPs,
                 Selector = new Dictionary<string, string>
                 {
-                    { "app", serviceName }
+                    { "app", deploymentName }
                 }
             }
         };
 
-        await _kubernetes.CoreV1.CreateNamespacedServiceAsync(service, kNamespace);
+        await _kubernetes.CoreV1.ReplaceNamespacedServiceAsync(service, serviceName, kNamespace);
     }
 }

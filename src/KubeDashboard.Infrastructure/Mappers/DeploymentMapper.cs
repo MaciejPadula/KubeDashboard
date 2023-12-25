@@ -7,7 +7,6 @@ internal static class DeploymentMapper
 {
     internal static Deployment ToDto(this V1Deployment deployment) =>
         new(deployment.Name(),
-            DeploymentType.CronJob,
             deployment.Spec.Replicas ?? 0,
             deployment.Status.ReadyReplicas ?? 0,
             deployment.Spec.Template.Spec.Containers.Select(c => c.ToDto()),
@@ -18,7 +17,8 @@ internal static class DeploymentMapper
         {
             Metadata = new()
             {
-                Name = deployment.Name
+                Name = deployment.Name,
+                NamespaceProperty = deployment.Namespace
             },
             Status = new V1DeploymentStatus()
             {
@@ -38,7 +38,7 @@ internal static class DeploymentMapper
                 {
                     Spec = new()
                     {
-                        Containers = deployment.Images
+                        Containers = deployment.Containers
                                 .Select(x => x.ToIto())
                                 .ToList()
                     },

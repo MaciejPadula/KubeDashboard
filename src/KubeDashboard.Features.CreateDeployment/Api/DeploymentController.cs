@@ -19,6 +19,6 @@ public class DeploymentController : ApiControllerBase
     public async Task Create([FromBody] CreateRequest request)
     {
         await _mediator.Send(new CreateDeploymentCommand(
-            request.Name, request.Type, request.Replicas, request.Images, request.Namespace));
+            request.Name, request.Replicas, request.Containers, request.Namespace));
     }
 }

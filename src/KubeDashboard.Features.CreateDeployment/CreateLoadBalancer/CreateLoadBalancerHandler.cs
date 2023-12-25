@@ -13,17 +13,18 @@ public record class CreateLoadBalancerCommand(
 internal class CreateLoadBalancerHandler : IRequestHandler<CreateLoadBalancerCommand>
 {
     private readonly IServiceManager _serviceManager;
-    private readonly IDeploymentManager _deploymentManager;
 
-    public CreateLoadBalancerHandler(IServiceManager serviceManager, IDeploymentManager deploymentManager)
+    public CreateLoadBalancerHandler(IServiceManager serviceManager)
     {
         _serviceManager = serviceManager;
-        _deploymentManager = deploymentManager;
     }
 
     public async Task Handle(CreateLoadBalancerCommand request, CancellationToken cancellationToken)
     {
-        await _serviceManager.AddService(request.ServiceName, request.Namespace, request.Configuration);
-        await _deploymentManager.AddServiceForDeployment(request.DeploymentName, request.ServiceName, request.Namespace);
+        await _serviceManager.AddLoadBalancer(
+            request.ServiceName,
+            request.DeploymentName,
+            request.Namespace,
+            request.Configuration);
     }
 }

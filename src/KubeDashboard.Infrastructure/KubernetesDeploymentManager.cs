@@ -17,14 +17,13 @@ internal class KubernetesDeploymentManager : IDeploymentManager
         _kubernetes = kubernetes;
     }
 
-    public async Task AddDeploymentEnvironmentVariables(string deploymentName, string kNamespace, Dictionary<string, string> variables)
+    public async Task AddOrUpdateEnvironmentVariables(string deploymentName, string kNamespace, Dictionary<string, string> variables)
     {
-        var deploys = await _kubernetes.AppsV1.ListNamespacedDeploymentAsync(kNamespace);
-        var deploy = deploys.Items.FirstOrDefault(d => d.Name() == deploymentName);
+        var deploy = await _kubernetes.AppsV1.ReadNamespacedDeploymentAsync(deploymentName, kNamespace);
 
         var containers = deploy?.Spec?.Template?.Spec?.Containers;
 
-        if (containers is null)
+        if (deploy is null || containers is null)
         {
             return;
         }
@@ -50,34 +49,50 @@ internal class KubernetesDeploymentManager : IDeploymentManager
             }
         }
 
-        await _kubernetes.AppsV1.ReplaceNamespacedDeploymentAsync(deploy, deploymentName, kNamespace);
+        await PatchDeployment(deploy);
     }
 
-    public async Task AddServiceForDeployment(string deploymentName, string serviceName, string kNamespace)
+    public async Task AddDeployment(Deployment deployment)
     {
-        var deploys = await _kubernetes.AppsV1.ListNamespacedDeploymentAsync(kNamespace);
-        var deploy = deploys.Items.FirstOrDefault(d => d.Name() == deploymentName);
+        await _kubernetes.AppsV1.CreateNamespacedDeploymentAsync(deployment.ToIto(), deployment.Namespace);
+    }
 
-        if (deploy is null)
+    public async Task UpdateDeployment(Deployment deployment)
+    {
+        var deploy = await _kubernetes.AppsV1.ReadNamespacedDeploymentAsync(deployment.Name, deployment.Namespace);
+        await PatchDeployment(Update(deploy, deployment));
+    }
+
+    private V1Deployment Update(V1Deployment oldDeployment, Deployment deployment)
+    {
+        oldDeployment.Metadata = new V1ObjectMeta
         {
-            return;
-        }
+            Name = deployment.Name,
+            NamespaceProperty = deployment.Namespace
+        };
+        oldDeployment.Spec.Selector.MatchLabels = new Dictionary<string, string>
+        {
+            { "app", deployment.Name }
+        };
+        oldDeployment.Spec.Replicas = deployment.Replicas;
+        var env = oldDeployment.Spec.Template.Spec.Containers.SelectMany(c => c.Env).ToList();
+        oldDeployment.Spec.Template.Spec.Containers = deployment.Containers
+            .Select(c =>
+            {
+                var cont = c.ToIto();
+                cont.Env = env;
+                return cont;
+            })
+            .ToList();
+        oldDeployment.Spec.Template.Metadata.Labels = new Dictionary<string, string>() { { "app", deployment.Name } };
+        oldDeployment.Status.Replicas = deployment.Replicas;
 
-        deploy.Spec.Selector.MatchLabels.Add("app", serviceName);
-        //deploy.Spec.Template.Metadata.Labels["app"] = serviceName;
-        await _kubernetes.AppsV1.ReplaceNamespacedDeploymentAsync(deploy, deploymentName, kNamespace);
-    }
-
-    public async Task CreateDeployment(Deployment deployment)
-    {
-        await _kubernetes.AppsV1.CreateNamespacedDeploymentAsync(
-            deployment.ToIto(), deployment.Namespace);
+        return oldDeployment;
     }
 
     public async Task<Dictionary<string, string>> GetDeploymentEnvironmentVariables(string deploymentName, string kNamespace)
     {
-        var deploys = await _kubernetes.AppsV1.ListNamespacedDeploymentAsync(kNamespace);
-        var deploy = deploys.Items.FirstOrDefault(d => d.Name() == deploymentName);
+        var deploy = await _kubernetes.AppsV1.ReadNamespacedDeploymentAsync(deploymentName, kNamespace);
 
         return deploy?.Spec?.Template?.Spec?.Containers?
             .SelectMany(c => c.Env)?
@@ -123,5 +138,22 @@ internal class KubernetesDeploymentManager : IDeploymentManager
 
         await _kubernetes.AppsV1.PatchNamespacedDeploymentAsync(new V1Patch(
             patch, V1Patch.PatchType.JsonPatch), name, kNamespace);
+    }
+
+    private async Task PatchDeployment(V1Deployment newDeployment)
+    {
+        var options = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = true
+        };
+        var deploy = await _kubernetes.AppsV1.ReadNamespacedDeploymentAsync(newDeployment.Name(), newDeployment.Namespace());
+
+        var old = JsonSerializer.SerializeToDocument(deploy, options);
+        var expected = JsonSerializer.SerializeToDocument(newDeployment);
+        var patch = old.CreatePatch(expected);
+
+        await _kubernetes.AppsV1.PatchNamespacedDeploymentAsync(
+            new V1Patch(patch, V1Patch.PatchType.JsonPatch), deploy.Name(), deploy.Namespace());
     }
 }

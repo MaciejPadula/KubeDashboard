@@ -4,5 +4,6 @@ namespace KubeDashboard.Interfaces;
 
 public interface IServiceManager
 {
-    Task AddService(string serviceName, string kNamespace, LoadBalancerConfiguration configuration);
+    Task AddLoadBalancer(string serviceName, string deploymentName, string kNamespace, LoadBalancerConfiguration configuration);
+    Task AddCronJob(string serviceName, string deploymentName, string kNamespace);
 }

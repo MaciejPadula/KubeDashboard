@@ -4,7 +4,7 @@ using MediatR;
 
 namespace KubeDashboard.Features.CreateDeployment.CreateDeployment;
 
-public record class CreateDeploymentCommand(string Name, DeploymentType Type, int Replicas, IEnumerable<TaggedImage> Images, string Namespace) : IRequest;
+public record class CreateDeploymentCommand(string Name, int Replicas, IEnumerable<Container> Containers, string Namespace) : IRequest;
 
 internal class CreateDeploymentCommandHandler : IRequestHandler<CreateDeploymentCommand>
 {
@@ -17,12 +17,11 @@ internal class CreateDeploymentCommandHandler : IRequestHandler<CreateDeployment
 
     public async Task Handle(CreateDeploymentCommand request, CancellationToken cancellationToken)
     {
-        await _deploymentManager.CreateDeployment(new Deployment
+        await _deploymentManager.AddDeployment(new Deployment
         {
             Name = request.Name,
-            Type = request.Type,
             Replicas = request.Replicas,
-            Images = request.Images,
+            Containers = request.Containers,
             Namespace = request.Namespace
         });
     }

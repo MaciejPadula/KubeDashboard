@@ -19,7 +19,7 @@ internal class AddEnvironmentVariablesHandler : IRequestHandler<AddEnvironmentVa
 
     public async Task Handle(AddEnvironmentVariablesCommand request, CancellationToken cancellationToken)
     {
-        await _deploymentManager.AddDeploymentEnvironmentVariables(
+        await _deploymentManager.AddOrUpdateEnvironmentVariables(
             request.DeploymentName,
             request.Namespace,
             request.EnvironmentVariables);
