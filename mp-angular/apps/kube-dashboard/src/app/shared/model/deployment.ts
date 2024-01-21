@@ -1,9 +1,9 @@
-import { TaggedImage } from "./tagged-image";
+import { Container } from "./container";
 
 export interface Deployment {
   name: string;
   replicas: number;
   aliveReplicas: number;
   namespace: string;
-  images: TaggedImage[];
+  containers: Container[];
 }

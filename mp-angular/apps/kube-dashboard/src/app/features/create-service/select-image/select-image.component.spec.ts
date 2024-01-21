@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AddDeploymentComponent } from './add-deployment.component';
+import { SelectImageComponent } from './select-image.component';
 
-describe('AddDeploymentComponent', () => {
-  let component: AddDeploymentComponent;
-  let fixture: ComponentFixture<AddDeploymentComponent>;
+describe('SelectImageComponent', () => {
+  let component: SelectImageComponent;
+  let fixture: ComponentFixture<SelectImageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddDeploymentComponent],
+      imports: [SelectImageComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AddDeploymentComponent);
+    fixture = TestBed.createComponent(SelectImageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

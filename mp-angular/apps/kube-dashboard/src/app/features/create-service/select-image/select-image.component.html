@@ -1,0 +1,10 @@
+<div>
+  @for (image of images(); track $index) {
+    <div>{{image.name}}</div>
+    <div>
+      @for (tag of image.tags; track $index) {
+        <div>{{tag}}</div>
+      }
+    </div>
+  }
+</div>

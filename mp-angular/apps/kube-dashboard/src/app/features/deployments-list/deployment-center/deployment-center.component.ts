@@ -39,9 +39,8 @@ export class DeploymentCenterComponent implements OnInit {
 
   private getChart(alivePods: number, deadPods: number) {
     return new Chart(`pods-chart-${this.deployment.name}`, {
-      type: 'pie', //this denotes tha type of chart
-
-      data: {// values on X-Axis
+      type: 'pie',
+      data: {
         labels: ['Alive', 'Dead',],
         datasets: [{
           label: 'Deployment Pods',

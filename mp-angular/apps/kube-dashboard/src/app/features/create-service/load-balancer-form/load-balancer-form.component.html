@@ -1,0 +1,22 @@
+<form class="flex flex-col" [formGroup]="deployForm">
+  <mat-form-field>
+    <mat-label>Service Name</mat-label>
+    <input matInput formControlName="serviceName" placeholder="sql-server" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Deployment Name</mat-label>
+    <input matInput formControlName="deployName" placeholder="sql-server" />
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Replicas</mat-label>
+    <input matInput formControlName="replicas" placeholder="1" />
+  </mat-form-field>
+
+  @defer (on viewport) {
+    <mp-angular-select-image />
+  } @placeholder {
+    <div>placeholder</div>
+  }
+</form>

@@ -18,6 +18,8 @@
     <ProjectReference Include="..\KubeDashboard.Features.DeploymentControl\KubeDashboard.Features.DeploymentControl.csproj" />
     <ProjectReference Include="..\KubeDashboard.Features.DeploymentsList.Api\KubeDashboard.Features.DeploymentsList.Api.csproj" />
     <ProjectReference Include="..\KubeDashboard.Features.DeploymentsList\KubeDashboard.Features.DeploymentsList.csproj" />
+    <ProjectReference Include="..\KubeDashboard.Features.Namespaces.Api\KubeDashboard.Features.Namespaces.Api.csproj" />
+    <ProjectReference Include="..\KubeDashboard.Features.Namespaces\KubeDashboard.Features.Namespaces.csproj" />
     <ProjectReference Include="..\KubeDashboard.Infrastructure\KubeDashboard.Infrastructure.csproj" />
   </ItemGroup>
 

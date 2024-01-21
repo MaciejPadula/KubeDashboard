@@ -4,7 +4,7 @@ using MediatR;
 
 namespace KubeDashboard.Features.AvailableImagesList.GetAvailableImages;
 
-internal record class GetAvailableItemsQuery(string RegistryBaseUrl) : IRequest<List<Image>>;
+public record class GetAvailableItemsQuery(string RegistryBaseUrl) : IRequest<List<Image>>;
 
 internal class GetAvailableImagesHandler : IRequestHandler<GetAvailableItemsQuery, List<Image>>
 {

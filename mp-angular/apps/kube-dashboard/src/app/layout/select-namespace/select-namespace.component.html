@@ -1,0 +1,9 @@
+<mat-form-field>
+  <mat-select [formControl]="selectControl">
+    @for (namespace of namespaces(); track $index) {
+      <mat-option [value]="namespace">
+        {{ namespace }}
+      </mat-option>
+    }
+  </mat-select>
+</mat-form-field>

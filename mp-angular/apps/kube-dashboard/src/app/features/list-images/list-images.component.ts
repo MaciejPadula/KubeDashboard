@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AvailableImagesService } from './service/available-images.service';
-import { DockerImage } from './model/docker-image';
+import { AvailableImagesService } from '../../shared/service/available-images.service';
+import { DockerImage } from '../../shared/model/docker-image';
 import { MaterialModule } from '../../shared/material.module';
 import { SharedModule } from '../../shared/shared.module';
 

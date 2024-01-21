@@ -1,7 +1,7 @@
 <div>
-  @for (image of deployment.images; track $index) {
+  @for (container of deployment.containers; track $index) {
     <div>
-      {{ image.name }} : {{ image.tag }}
+      {{ container.image.name }} : {{ container.image.tag }}
     </div>
   }
 </div>

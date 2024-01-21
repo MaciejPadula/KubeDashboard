@@ -16,6 +16,7 @@ public static class IServiceCollectionExtensions
         
         services.AddScoped<IDeploymentManager, KubernetesDeploymentManager>();
         services.AddScoped<IServiceManager, KubernetesServiceManager>();
+        services.AddScoped<INamespaceRepository, KubernetesNamespaceRepository>();
 
         return services;
     }

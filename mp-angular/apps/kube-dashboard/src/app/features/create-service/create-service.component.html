@@ -1,0 +1,37 @@
+<mat-stepper linear #stepper>
+  <mat-step [stepControl]="selectedType">
+    <ng-template matStepLabel>Select Service Type</ng-template>
+
+    <mat-radio-group [formControl]="selectedType">
+      <mat-radio-button [value]="ServiceType.LoadBalancer">{{'Service.LoadBalancer' | translate}}</mat-radio-button>
+      <mat-radio-button [value]="ServiceType.CronJob">{{'Service.CronJob' | translate}}</mat-radio-button>
+    </mat-radio-group>
+
+    <div>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Configure Service</ng-template>
+    @if (selectedType.value === ServiceType.LoadBalancer) {
+      <mp-angular-load-balancer-form />
+    } @else if (selectedType.value === ServiceType.CronJob) {
+
+    }
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <!-- <button mat-button matStepperNext>Confirm</button> -->
+    </div>
+  </mat-step>
+
+  <!-- <mat-step>
+    <ng-template matStepLabel>Summary</ng-template>
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step> -->
+</mat-stepper>

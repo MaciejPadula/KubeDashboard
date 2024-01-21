@@ -1,5 +1,6 @@
 using KubeDashboard.Infrastructure;
 using KubeDashboard.Features.DeploymentsList;
+using KubeDashboard.Features.Namespaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructureModule();
 builder.Services.AddDeploymentsListModule();
+builder.Services.AddNamespacesModule();
 
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
